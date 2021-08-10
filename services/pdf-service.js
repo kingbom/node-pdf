@@ -18,16 +18,16 @@ const getTemplateHtml = async () => {
  const generatePdf = async() => {
     let data = {};
     await getTemplateHtml().then(async (res) => {
-        console.log("Compiing the template with handlebars")
+        console.log("Compiing the template with handlebars");
         const template = hb.compile(res, { strict: true });
         const result = template(data);
         const html = result;
         const browser = await puppeteer.launch();
-        const page = await browser.newPage()
-        await page.setContent(html)
-        await page.pdf({ path: 'invoice.pdf', format: 'A4' })
+        const page = await browser.newPage();
+        await page.setContent(html);
+        await page.pdf({ path: 'invoice.pdf', format: 'A4' });
         await browser.close();
-        console.log("PDF Generated")
+        console.log("PDF Generated");
     }).catch(err => {
         console.error(err)
     });
